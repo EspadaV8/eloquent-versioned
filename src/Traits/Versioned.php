@@ -120,7 +120,7 @@ trait Versioned
             if ($this->isDirty()) {
                 $saved = $db->transaction(function () use ($query, $db, $options) {
                     $oldVersion = $this->replicate();
-                    $oldVersion->forceFill($this->original);
+                    $oldVersion->setRawAttributes($this->original, true);
                     $oldVersion->{$this->primaryKey} = null;
                     $oldVersion->{static::getIsCurrentVersionColumn()} = false;
 
