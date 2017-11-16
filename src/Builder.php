@@ -16,7 +16,7 @@ class Builder extends EloquentBuilder
      */
     public function first($columns = array('*'))
     {
-        if (count($this->query->orders) == 0) {
+        if ($this->getQueryOrderCount() === 0) {
             $this->orderBy(static::COLUMN_MODEL_ID);
         }
 
@@ -30,7 +30,7 @@ class Builder extends EloquentBuilder
      */
     public function getModels($columns = array('*'))
     {
-        if (count($this->query->orders) == 0) {
+        if ($this->getQueryOrderCount() === 0) {
             $this->orderBy(static::COLUMN_MODEL_ID);
         }
 
@@ -49,5 +49,14 @@ class Builder extends EloquentBuilder
     public function findAll($id, $columns = array('*'))
     {
         return $this->findMany([$id], $columns);
+    }
+
+    private function getQueryOrderCount()
+    {
+        if ($this->query->orders === null) {
+            return 0;
+        }
+
+        return count($this->query->orders);
     }
 }
