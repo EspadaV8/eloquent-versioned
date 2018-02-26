@@ -2,9 +2,9 @@
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\ScopeInterface;
+use Illuminate\Database\Eloquent\Scope;
 
-class VersioningScope implements ScopeInterface
+class VersioningScope implements Scope
 {
 
     protected $extensions = ['WithOldVersions', 'OnlyOldVersions'];
